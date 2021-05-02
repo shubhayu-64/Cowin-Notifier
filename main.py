@@ -1,10 +1,7 @@
 import requests
 import time
 import json
-
-mobileNumber = {
-    "mobile": "7679325872"
-}
+import hashlib
 
 
 def updateData(key, value):
@@ -21,20 +18,44 @@ def fetchData(key):
     return preData[key]
 
 
-def authentication():
-    mobResponse = requests.post(
-        "https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP", json=mobileNumber)
-    if mobResponse.status_code == 200:
-        print(mobResponse)
-        res = mobResponse.json()
-        print(res['txnId'])
-        updateData('txnId', res['txnId'])
-    elif mobResponse.status_code == 400:
+def authInitiate():
+    generateOTP = {"mobile": fetchData("mobile")}
+    Response = requests.post(
+        "https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP", json=generateOTP)
+    if Response.status_code == 200:
+        data = Response.json()
+        updateData('txnId', data['txnId'])
+        print("OTP send successfully.\n")
+        updateData("success", "True")
+
+    elif Response.status_code == 400:
         print("Can't send OTP right now. Please try again later.")
     else:
         print("Uh oh! I think I'm lost.")
 
 
+def authConfirm():
+    if fetchData("success") == "True":
+        pin = input("Enter your OTP: ").encode('utf-8')
+        confirmOTP = {"otp": hashlib.sha256(
+            pin).hexdigest(), "txnId": fetchData("txnId")}
+        Response = requests.post(
+            "https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP", json=confirmOTP)
+        if Response.status_code == 200:
+            data = Response.json()
+            updateData('token', data['token'])
+            print("Yay! OTP confirmed successfully.")
+
+        elif Response.status_code == 400:
+            updateData("success", "False")
+            print("Can't verify OTP right now. Please try again later.")
+        else:
+            updateData("success", "False")
+            print("Uh oh! I think I'm lost.")
+    else:
+        pass
+
+
 if __name__ == "__main__":
-    print(fetchData("mobile"))
-    authentication()
+    authInitiate()
+    authConfirm()
