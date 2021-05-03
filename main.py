@@ -46,7 +46,7 @@ def fetch_data():
                     if sessions['available_capacity'] > 0:
                         # print("Available")
                         msg = f"Vaccine appointment available for: \n\n - Age: {min_age_limit}+ \n - On: {cur_date}\n - Fee: {fee} \n\nIn {name}, {block_name}, {district_name}, {state}, {pincode} \n#COVID19 #COVID19Vaccine #CovidIndia #vaccination #CowinNotifier #WestBengal"
-                        print(msg)
+                        # print(msg)
                         tweet(msg)
                         time.sleep(3)
         except:
@@ -66,7 +66,7 @@ def fetch_data():
                         if sessions['available_capacity'] > 0:
                             # print("Available")
                             msg = f"Vaccine appointment available for: \n\n - Age: {min_age_limit}+ \n - On: {cur_date}\n - Fee: {fee} \n\nIn {name}, {block_name}, {district_name}, {state}, {pincode} \n#COVID19 #COVID19Vaccine #CovidIndia #vaccination #CowinNotifier #WestBengal"
-                            print(msg)
+                            # print(msg)
                             tweet(msg)
                             time.sleep(3)
             except:
