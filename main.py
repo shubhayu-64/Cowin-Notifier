@@ -1,61 +1,61 @@
 import requests
-import time
+from datetime import date
+from datetime import datetime
 import json
-import hashlib
+from pprint import pprint
 
 
-def updateData(key, value):
+def update_DateTime():
+    today = date.today()
+    day = today.strftime("%d-%m-%y")
+    print(day)
+    now = datetime.now()
+    time = now.strftime("%H:%M:%S")
+    print(time)
+
     with open("data.json", "r") as data:
         preData = json.load(data)
-    preData[key] = value
+    preData["date"] = day
+    preData["time"] = time
     with open("data.json", "w") as data:
         json.dump(preData, data)
 
 
-def fetchData(key):
-    with open("data.json", "r") as data:
-        preData = json.load(data)
-    return preData[key]
-
-
-def authInitiate():
-    generateOTP = {"mobile": fetchData("mobile")}
-    Response = requests.post(
-        "https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP", json=generateOTP)
-    if Response.status_code == 200:
-        data = Response.json()
-        updateData('txnId', data['txnId'])
-        print("OTP send successfully.\n")
-        updateData("success", "True")
-
-    elif Response.status_code == 400:
-        print("Can't send OTP right now. Please try again later.")
-    else:
-        print("Uh oh! I think I'm lost.")
-
-
-def authConfirm():
-    if fetchData("success") == "True":
-        pin = input("Enter your OTP: ").encode('utf-8')
-        confirmOTP = {"otp": hashlib.sha256(
-            pin).hexdigest(), "txnId": fetchData("txnId")}
-        Response = requests.post(
-            "https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP", json=confirmOTP)
-        if Response.status_code == 200:
-            data = Response.json()
-            updateData('token', data['token'])
-            print("Yay! OTP confirmed successfully.")
-
-        elif Response.status_code == 400:
-            updateData("success", "False")
-            print("Can't verify OTP right now. Please try again later.")
-        else:
-            updateData("success", "False")
-            print("Uh oh! I think I'm lost.")
-    else:
-        pass
-
-
 if __name__ == "__main__":
-    authInitiate()
-    authConfirm()
+    with open("districts.json", "r") as file:
+        fetch = json.load(file)
+    today = date.today()
+    day = today.strftime("%d-%m-%y")
+    districts = fetch['districts']
+    for element in districts:
+        district_id = element['district_id']
+        link = f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id={district_id}&date={day}"
+        response = requests.get(link)
+        data = response.json()
+        for centers in data['centers']:
+            block_name = centers['block_name']
+            district_name = centers['district_name']
+            name = centers['name']
+            pincode = centers['pincode']
+            fee = centers['fee_type']
+            for sessions in centers['sessions']:
+                date = sessions['date']
+                min_age_limit = sessions['min_age_limit']
+                msg = f"Vaccine appointment available for: \n\n - Age: {min_age_limit}+ \n - On: {date}\n - Fee: {fee} \n\nIn {name}, {block_name}, {district_name}, {pincode} \n#COVID19 #COVID19Vaccine #CovidIndia #vaccination"
+                print(msg)
+
+    '''
+    response = requests.get(
+        "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=725&date=03-05-2021")
+    data = response.json()
+    for centers in data['centers']:
+        block_name = centers['block_name']
+        district_name = centers['district_name']
+        name = centers['name']
+        pincode = centers['pincode']
+        fee = centers['fee_type']
+        for sessions in centers['sessions']:
+            date = sessions['date']
+            min_age_limit = sessions['min_age_limit']
+            msg = f"Vaccine appointment available for: \n\n - Age: {min_age_limit}+ \n - On: {date}\n - Fee: {fee} \n\nIn {name}, {block_name}, {district_name}, {pincode} \n#COVID19 #COVID19Vaccine #CovidIndia #vaccination"
+            print(msg)'''
