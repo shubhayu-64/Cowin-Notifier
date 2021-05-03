@@ -22,7 +22,6 @@ def fetch_data():
     current_date = date.today()
     day = current_date.strftime("%d-%m-%y")
     districts = fetch['districts']
-    c = 0
     for element in districts:
         district_id = element['district_id']
         link = f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id={district_id}&date={day}"
@@ -44,8 +43,6 @@ def fetch_data():
                     msg = f"Vaccine appointment available for: \n\n - Age: {min_age_limit}+ \n - On: {cur_date}\n - Fee: {fee} \n\nIn {name}, {block_name}, {district_name}, {state}, {pincode} \n#COVID19 #COVID19Vaccine #CovidIndia #vaccination #CowinNotifier #WestBengal"
                     tweet(msg)
                     time.sleep(3)
-        if c > 2:
-            break
 
 
 if __name__ == "__main__":
