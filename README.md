@@ -14,7 +14,7 @@ The Twitter handle of the Bot: [@CowinNotifier](https://twitter.com/CowinNotifie
 1. Clone the repo or download manually.
 
 ```bash
-git clone https://github.com/shubhayu-64/Cowin-Notifier.git
+git clone https://github.com/username/Cowin-Notifier.git
 ```
 
 2. Move to cloned/downloaded directory ` cd Cowin-Notifier`
