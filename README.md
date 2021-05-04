@@ -11,7 +11,16 @@ The Twitter handle of the Bot: [@CowinNotifier](https://twitter.com/CowinNotifie
 
 ## Screenshots
 - [@CowinNotifier](https://twitter.com/CowinNotifier) Twitter account
+
 ![Profile Image](/img/profile.png)
+
+- Tweets posted.
+
+![Tweets Image](/img/tweets.png)
+
+- Terminal of the script
+
+![Terminal Image](/img/terminal.png)
 
 ## Installation
 
