@@ -9,19 +9,6 @@ The Twitter handle of the Bot: [@CowinNotifier](https://twitter.com/CowinNotifie
 - Find any open slots in any district and tweet important information.
 - Runs 24/7 and updates at an interval of 12 hours.
 
-## Screenshots
-- [@CowinNotifier](https://twitter.com/CowinNotifier) Twitter account
-
-![Profile Image](/img/profile.png)
-
-- Tweets posted.
-
-![Tweets Image](/img/tweets.png)
-
-- Terminal of the script
-
-![Terminal Image](/img/terminal.png)
-
 ## Installation
 
 1. Clone the repo or download manually.
@@ -34,6 +21,20 @@ git clone https://github.com/shubhayu-64/Cowin-Notifier.git
 3. Run `pip install requirements.txt`
 4. Update `config.py` with your Twitter API credentials.
 5. Start the script by `python main.py`
+
+
+## Screenshots
+- [@CowinNotifier](https://twitter.com/CowinNotifier) Twitter account
+
+![Profile Image](/img/profile.png)
+
+- Tweets posted.
+
+![Tweets Image](/img/tweets.png)
+
+- Terminal of the script
+
+![Terminal Image](/img/terminal.png)
 
 ## Deploying
 
