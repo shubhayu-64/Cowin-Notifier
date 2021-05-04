@@ -1,6 +1,6 @@
 # Cowin-Notifier
 
-This is a python script that tweets available slots on the Cowin website.
+This is a python script that tweets available slots on the Cowin website for both 45+ and 18+ age range. This uses the Cowin Public APIs.
 
 The Twitter handle of the Bot: [@CowinNotifier](https://twitter.com/CowinNotifier)
 
