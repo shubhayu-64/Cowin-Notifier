@@ -58,7 +58,9 @@ Pull requests are welcome. For major changes, feel free to open an issue first t
 
 💙 If you like this project, give it a ⭐ and share it with friends!
 
-[☕ Buy me a coffee](https://www.buymeacoffee.com/shubhayu64)
+<a href="https://www.buymeacoffee.com/shubhayu64" target="_blank">
+<img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" width="270" />
+</a>
 
 ---
 
