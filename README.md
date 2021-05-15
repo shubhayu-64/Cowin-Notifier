@@ -11,7 +11,7 @@ The Twitter handle of the Bot: [@Cowin_Notifier](https://twitter.com/cowin_notif
 ## Features
 
 - Find any open slots in any district and tweet important information.
-- Runs 24/7 and updates at an interval of 12 hours.
+- Runs 24/7 and updates at an interval of 1 hour.
 
 ## Installation
 
